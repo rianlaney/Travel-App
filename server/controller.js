@@ -16,31 +16,60 @@ module.exports = {
     getHomePage: (req,res)=>{
         res.status(200).sendFile(path.join(__dirname, '../public/index.html'))
     },
+
     getStates: (req,res)=>{
         sequelize.query(`
-        SELECT * FROM states;
+        SELECT * FROM states
+        ORDER BY state_id ASC;
         `)
         .then((dbRes)=> res.status(200).send(dbRes[0]))
         .catch((err)=> console.log(err))
     
     },
+    getSpecificState: (req, res) => {
+        sequelize.query(`
+        SELECT * FROM states
+        WHERE name = '${req.params.state}'
+        ;`)
+        .then((dbRes)=> res.status(200).send(dbRes[0]))
+        .catch((err)=> console.log(err))
+    },
+
+    getDropdown: (req,res) => {
+        sequelize.query(`
+        SELECT name FROM states
+        ORDER BY state_id ASC;
+        `)
+        .then((dbRes)=> res.status(200).send(dbRes[0]))
+        .catch((err)=> console.log(err))
+    },
 
     getActivities: (req,res)=>{
-        let { id } = req.params
+        let { state } = req.params
         sequelize.query(`
-        SELECT activities FROM states
-        WHERE state_id = ${id};
+        SELECT activity, name, visited FROM activities
+        JOIN states ON states.state_id = activities.state_id
+        WHERE states.state_id IN (
+            SELECT state_id FROM states
+            WHERE name = '${state}'
+        );
         `)
+        .then((dbRes)=> res.status(200).send(dbRes[0]))
+        .catch((err)=> console.log(err))
     },
 
 
     // put
     updateVisited: (req,res)=>{ 
-        let { id } = req.params     
+        let { id, visited } = req.body  
+        visited = !visited      
         sequelize.query(`
         UPDATE states
-        SET visited = true
+        SET visited = ${visited ? 'True' : 'False'}
         WHERE state_id = ${id};
+
+        SELECT * FROM states
+        ORDER BY state_id ASC;
         `)
         .then((dbRes)=> res.status(200).send(dbRes[0]))
         .catch((err)=> console.log(err))
@@ -73,8 +102,8 @@ module.exports = {
     deleteActivity: (req,res)=>{
         let { id } = req.params     
         sequelize.query(`
-        DELETE FROM states
-        WHERE activities = ${id};
+        DELETE FROM activities
+        WHERE activity = ${id};
         `)
         .then((dbRes)=> res.status(200).send(dbRes[0]))
         .catch((err)=> console.log(err))
@@ -85,13 +114,21 @@ module.exports = {
 
     seed: (req, res) => {
         sequelize.query(`
+        DROP TABLE IF exists activities;
             DROP TABLE IF exists states;
+
 
             CREATE TABLE states (
                 state_id serial primary key, 
                 name varchar(100),
-                visited boolean,
-                activities varchar (250)
+                visited boolean
+                
+            );
+
+            CREATE TABLE activities (
+                activity_id serial primary key, 
+                activity varchar(250),
+                state_id int references states(state_id)
             );
 
             
@@ -109,8 +146,8 @@ module.exports = {
             ('Georgia', false),
             ('Hawaii', false),
             ('Idaho', false),
-            ('Illinois', false)
-            ('Indiana', false)
+            ('Illinois', false),
+            ('Indiana', false),
             ('Iowa', false),
             ('Kansas', false),
             ('Kentucky', false),
@@ -129,9 +166,9 @@ module.exports = {
             ('New Jersey', false),
             ('New Mexico', false),
             ('New York', false),
-            ('North Carolina', false),
+            ('North Carolina', true),
             ('North Dakota', false),
-            ('Ohio', false),
+            ('Ohio', true),
             ('Oklahoma', false),
             ('Oregon', false),
             ('Pennsylvania', false),

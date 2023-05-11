@@ -1,0 +1,213 @@
+
+
+img, video, canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+h3{
+    font-size: 100px;
+}
+
+h5 {
+    font-size: 50px;
+}
+
+header img {
+    height: 80px;
+    margin-left: 40px;
+}
+
+#portfolio{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: #777;
+    
+}
+#welcome {
+    height: 50vh;
+    padding: 20px;
+    border: 0px;
+    background-color: black;
+}
+#face{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    float: right;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+#about {
+    background-color: rgb(34, 33, 33);
+    color: rgb(218, 216, 216);
+    height: 50vh;
+    float: center;
+    padding: 10px;
+    text-align: inherit;
+    border: solid white;
+    
+}
+#aboutme {
+    width: 40vw;
+    font-size: large;
+    padding: 10px;
+    line-height: 30px;
+}
+#skillz{
+    background-color: black;
+    height: 30vh;
+}
+#skillz-list{
+    display: grid;
+    padding: 40px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    font-size: larger;
+}
+#projects {
+    background-color: rgb(34, 33, 33);
+    color: rgb(218, 216, 216);
+    height: 60vh;
+    border: solid white;
+}
+
+#projects-list {
+    display: flex;
+    /* flex-direction: column; */
+    min-height: 500px;
+    padding: 50px;
+    border: solid grey;
+    justify-content: space-between;
+}
+#videos{
+    height: 100px;
+    width: 100px;
+}
+#socials {
+    background-color: black;
+    height: 30vh;
+    display: flex;
+    /* flex-direction: column; */
+    min-height: 500px;
+    padding: 50px;
+    border: solid grey;
+    justify-content: space-between;
+}
+
+
+
+header {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+    z-index: 2;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 20px;
+}
+
+header li a {
+    color: black;
+    text-decoration: none;
+}
+#mullet {
+    border-radius: 50%;
+}
+
+
+#usa {
+   display: block;
+   top: 10px;
+   margin-top: 2%;
+   margin-left: auto;
+   margin-right: 25%;
+   width: 40%;
+}
+
+#roadtrip {
+    width: 75vw;
+    height: 50vh;
+    margin-left: -250px;
+}
+
+main {
+    /* position: absolute; */
+    color: black;
+    padding-bottom: 100px;
+}
+
+#input {
+    right: 10px;
+    display: flex;
+}
+
+#states-btn {
+    display: block;
+}
+.state-card {
+    background-color: rgb(240, 145, 3);
+    width: 200px;
+    margin: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#list-container {
+    display: flex;
+}
+section {
+    flex-direction: row;
+}
+
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+
+  footer {
+    padding-top: 20px;
+    background-color: #292c2f;
+    color: #bbb;
+  }
+  
+  footer a {
+    color: #999;
+    text-decoration:none;
+  }
+  
+  footer a:hover, footer a:focus {
+    color: #aaa;
+    text-decoration:none;
+    border-bottom:1px dotted #999;
+  }
+  
+  footer .form-control {
+      background-color: #1f2022;
+      box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+      border: none;
+      resize: none;
+      color: #d1d2d2;
+      padding: 0.7em 1em;
+  }
